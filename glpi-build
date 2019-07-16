@@ -1,0 +1,11 @@
+Cria o projeto
+oc new-project glpi --display-name="GLPI App" --description="GLIP project"
+
+Cria a conta de serviço
+oc create serviceaccount myaccount -n glpi
+
+Permissiona a conta de serviço
+oc adm policy add-scc-to-user anyuid system:serviceaccount:glpi:myaccount
+
+Cria o build (e o deployment)
+oc new-app https://github.com/cmotta2016/docker-glpi.git -l name=glpi
